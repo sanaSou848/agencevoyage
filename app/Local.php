@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Local extends Model
 {
     //
-    public function avis(){
-    	return $this->hasMany('App\Avi');
+    public function avi(){
+    	return $this->belongTo('App\Avi');
     }
 
 
-    public function categories(){
-    	return $this->hasMany('App\Categorie');
+    public function categorie(){
+    	return $this->belongTo('App\Categorie');
     }
 
     public function photos(){
@@ -25,6 +25,9 @@ class Local extends Model
 
     public function offres(){
     	return $this->hasMany('App\Offre');
+    }
+    public function place(){
+        return $this->belongTo('App\Place');
     }
 
 

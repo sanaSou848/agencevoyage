@@ -14,7 +14,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::orderBy('id')->paginate(10);
+        return  view('categorie/indexcategorie',compact('categories'));
     }
 
     /**
@@ -24,7 +25,8 @@ class CategorieController extends Controller
      */
     public function create()
     {
-        //
+        
+        return  view('categorie/create');
     }
 
     /**
@@ -36,6 +38,12 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $this->validate($request,$this->validationRules());
+
+       $categorie = Categorie::create($data);
+       dd($categorie);
+       //return redirect()->route('categorie.show', $categorie);
+        
     }
 
     /**
@@ -47,6 +55,7 @@ class CategorieController extends Controller
     public function show(Categorie $categorie)
     {
         //
+         return view('categorie.show')->with('categorie',$categorie);
     }
 
     /**
@@ -81,5 +90,12 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         //
+    }
+
+
+
+    private function validationRules()
+    {
+        return['category' =>'required'];
     }
 }

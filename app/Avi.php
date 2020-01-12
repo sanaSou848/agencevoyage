@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avi extends Model
 {
     //
-    public function local(){
-    	return $this->belongsTo('App\Local');
+    public function locals(){
+    	return $this->HasMany('App\Local');
     }
 }
