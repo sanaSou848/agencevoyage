@@ -17,7 +17,7 @@ class CreatePhotosTable extends Migration
             $table->bigIncrements('id');
             $table->string('photo');
             $table->unsignedBigInteger('local_id');
-            $table->foreign('local_id')->references('id')->on('locals');
+            $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');
             $table->timestamps();
         });
     }

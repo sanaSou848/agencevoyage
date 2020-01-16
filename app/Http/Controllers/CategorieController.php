@@ -38,12 +38,11 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $this->validate($request,$this->validationRules());
-
+       $data = $this->validate($request,$this->validationRules());
+       
        $categorie = Categorie::create($data);
-       dd($categorie);
-       //return redirect()->route('categorie.show', $categorie);
-        
+       //dd($categorie);
+       return redirect()->route('categorie.show', $categorie)->with('message','categorie ajouté avec succés');   
     }
 
     /**
@@ -79,6 +78,7 @@ class CategorieController extends Controller
     public function update(Request $request, Categorie $categorie)
     {
         //
+        
     }
 
     /**
@@ -90,6 +90,8 @@ class CategorieController extends Controller
     public function destroy(Categorie $categorie)
     {
         //
+        $categorie->delete();
+        return redirect()->route('categorie.index')->with('successDelete','Categorie supprmier avec succés');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Photo;
+use App\Local;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
@@ -14,7 +15,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $phots = Photo::all();
+        $locals = Local::all();
+        return view('photo.indexphoto',compact('phots','locals'));
     }
 
     /**

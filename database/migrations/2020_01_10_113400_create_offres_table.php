@@ -16,7 +16,7 @@ class CreateOffresTable extends Migration
         Schema::create('offres', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('local_id');
-            $table->foreign('local_id')->references('id')->on('locals');
+            $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');
             $table->float('prixoffre', 8, 2);
             $table->text('description');
             $table->date('date_debut');

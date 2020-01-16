@@ -15,6 +15,8 @@ class PlaceController extends Controller
     public function index()
     {
         //
+        $places = Place::all();
+        return view('place.indexplace',compact('places'));
     }
 
     /**
@@ -25,6 +27,7 @@ class PlaceController extends Controller
     public function create()
     {
         //
+        return view('place.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+            if($request->has('image'))
+        {
+            $url = time().'-'.$request->image->getClientOriginalName();
+            $destination = 'images';
+            $request->image->move($destination,$url);
+        }
+        $place = Place::create([
+            'place'=>$request->place,
+            'photo'=>$url
+        ]);   
+       return redirect()->route('place.index')->with('message','place ajouté avec succés');   
     }
 
     /**
@@ -57,7 +71,7 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        //
+        return view('place.edit')->with('place',$place);
     }
 
     /**
@@ -69,7 +83,28 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        //
+
+        if($request->has('image'))
+        {
+            $url = time().'-'.$request->image->getClientOriginalName();
+            $destination = 'images';
+            $request->image->move($destination,$url);
+            $place->update([
+            'place'=>$request->place,
+            'photo'=>$url]);
+        return redirect()->route('place.index', $place)->with('successNewplace', 'place modifié avec succés');
+        }
+
+        else
+        {
+           $place->update([
+            'place'=>$request->place]);
+            return redirect()->route('place.index', $place)->with('successNewplace', 'place modifié avec succés'); 
+        }
+
+
+
+        
     }
 
     /**
@@ -81,5 +116,14 @@ class PlaceController extends Controller
     public function destroy(Place $place)
     {
         //
+
+        $place->delete();
+        return redirect()->route('place.index')->with('successDelete','Place supprmier avec succés');
     }
+    
+
+
+
+
+    
 }

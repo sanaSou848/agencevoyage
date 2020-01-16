@@ -18,7 +18,7 @@ class CreateAvisTable extends Migration
             $table->string('pseudo');
             $table->text('avis');
             $table->unsignedBigInteger('local_id');
-            $table->foreign('local_id')->references('id')->on('locals');
+            $table->foreign('local_id')->references('id')->on('locals')->onDelete('cascade');
             $table->timestamps();
         });
     }

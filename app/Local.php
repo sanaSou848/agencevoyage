@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Local extends Model
 {
     //
+    protected $guarded = [];
     public function avi(){
     	return $this->belongTo('App\Avi');
     }

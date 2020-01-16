@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -18,3 +19,15 @@ Route::get('/', function () {
 
 
 Route::resource('categorie','CategorieController');
+
+
+Route::resource('place','PlaceController');
+
+Route::resource('local','LocalController');
+
+Route::resource('photo','PhotoController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
