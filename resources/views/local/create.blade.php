@@ -4,6 +4,7 @@
 	<legend>Nouvelle Local</legend>
 	<form action="{{ route('local.store') }}" method="post" enctype="multipart/form-data">
 		@csrf
+		
 		<div class="form-group">
 			<label for="nom">Nom</label>
 			<input type="text" class="form-control" id="nom" name="nom">
@@ -39,6 +40,13 @@
 			<label for="description">prix</label>
 			<input type="text" class="form-control" id="prix" name="prix">
 		</div>
+
+
+
+		<div class="form-group">
+			<input id="image" type="file" name="image[]" multiple>
+		</div>
+
 
 		<input type="submit" class="btn btn-success" value="enregister">
 		<input type="reset" class="btn btn-warning" value="annuler">

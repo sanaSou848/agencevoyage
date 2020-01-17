@@ -9,12 +9,12 @@ class Local extends Model
     //
     protected $guarded = [];
     public function avi(){
-    	return $this->belongTo('App\Avi');
+    	return $this->belongsTo('App\Avi');
     }
 
 
     public function categorie(){
-    	return $this->belongTo('App\Categorie');
+    	return $this->belongsTo('App\Categorie');
     }
 
     public function photos(){
@@ -28,7 +28,7 @@ class Local extends Model
     	return $this->hasMany('App\Offre');
     }
     public function place(){
-        return $this->belongTo('App\Place');
+        return $this->belongsTo('App\Place');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Offre;
+use App\Local;
 use Illuminate\Http\Request;
 
 class OffreController extends Controller
@@ -15,6 +16,8 @@ class OffreController extends Controller
     public function index()
     {
         //
+        $offres = Offre::all();
+        return view('offre.indexoffre',compact('offres'));
     }
 
     /**
@@ -25,6 +28,8 @@ class OffreController extends Controller
     public function create()
     {
         //
+        $Locals = Local::all();
+        return view('offre.create',compact('Locals'));
     }
 
     /**

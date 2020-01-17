@@ -12,20 +12,33 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', 'HomeController@index');
+    
+
+
+
+
+Route::get('/admin', function () {
     return view('index');
 });
 
 
-
 Route::resource('categorie','CategorieController');
-
 
 Route::resource('place','PlaceController');
 
 Route::resource('local','LocalController');
 
 Route::resource('photo','PhotoController');
+
+Route::resource('offre','OffreController');
+Route::resource('reservation','ReservationController');
+
+
+
+
+
+
 
 Auth::routes();
 

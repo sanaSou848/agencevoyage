@@ -27,7 +27,8 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        $locals = Local::all();
+        return  view('photo/createphoto',compact('locals'));
     }
 
     /**
@@ -39,6 +40,23 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         //
+
+        if($request->hasfile('image'))
+        {
+            
+            foreach($request->file('image') as $image)
+            {
+                $url = time().'-'.$image->getClientOriginalName();
+                $destination = 'images';
+                $image->move($destination,$url);
+                $photo = Photo::create(['photo'=>$url,
+                'local_id'=>$request->local
+            ]);
+            }
+        }
+        
+       
+       return redirect()->route('photo.index')->with('message','local ajouté avec succés');
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Local;
 use App\Place;
 use App\Categorie;
+use App\Photo;
 use Illuminate\Http\Request;
 
 class LocalController extends Controller
@@ -39,9 +40,12 @@ class LocalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $local = Local::create(['nom'=>$request->nom,
+        
+
+         $local = Local::create(['nom'=>$request->nom,
             'nbretoile'=>$request->nbretoile,
             'capacite'=>$request->capacite,
             'description'=>$request->description,
@@ -49,6 +53,21 @@ class LocalController extends Controller
             'categorie_id'=>$request->cat,
             'place_id'=>$request->place,
         ]);
+
+        if($request->hasfile('image'))
+        {
+            
+            foreach($request->file('image') as $image)
+            {
+                $url = time().'-'.$image->getClientOriginalName();
+                $destination = 'images';
+                $image->move($destination,$url);
+                $photo = Photo::create(['photo'=>$url,
+                'local_id'=>$local->id
+            ]);
+            }
+        }
+        
        //dd($categorie);
        return redirect()->route('local.index')->with('message','local ajouté avec succés'); 
     }
